@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>test</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+<script>
+
+const MODEL_URL = 'http://localhost:5500/model.json';
+
+// For Keras use tf.loadLayersModel().
+const model = tf.loadGraphModel(MODEL_URL);
+
+model.then(function (res) {
+    const zeros = tf.zeros([1, 224, 224, 3]).toInt();
+    const prediction = res.executeAsync(zeros);
+    console.log(prediction);
+    console.log(res);
+}, function (err) {
+    console.log(err);
+});
+
+</script>
+</body>
+</html>
